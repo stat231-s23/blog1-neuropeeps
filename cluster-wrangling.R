@@ -108,7 +108,7 @@ ggplot(elbow_plot20, aes(x = k, y = tot.withinss)) +
   scale_x_continuous(breaks = 1:10) +
   labs(x = "Number of clusters (k)", 
        y = "Total within-cluster sum of squares")
-ggsave("img/elbow20.png")
+ggsave("img/elbow20.png", scale = 1)
 
 scatter_2020_kmeans4 <- scatter_scaled_2020 %>% 
   kmeans(centers = 4, nstart = 20)
@@ -143,7 +143,7 @@ ggplot(scatter_2020_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
                                        Country == "Venezuela" |
                                        Country == "Senegal",
                                      as.character(Country), "")))
-ggsave("img/freedom_death_cluster20.png")
+ggsave("img/freedom_death_cluster20.png", scale = 0.8)
 
 
 
@@ -176,7 +176,7 @@ ggplot(elbow_plot21, aes(x = k, y = tot.withinss)) +
   scale_x_continuous(breaks = 1:10) +
   labs(x = "Number of clusters (k)", 
        y = "Total within-cluster sum of squares")
-ggsave("img/elbow21.png")
+ggsave("img/elbow21.png", scale = 1)
 
 scatter_2021_kmeans4 <- scatter_scaled_2021 %>% 
   kmeans(centers = 4, nstart = 20)
@@ -185,10 +185,17 @@ scatter_2021_kmeans4_summary <- tidy(scatter_2021_kmeans4)
 names(scatter_2021_kmeans4_summary) = gsub(pattern = "_scaled", replacement = "", x = names(scatter_2021_kmeans4_summary))
 
 scatter_2021_kmeans4_country <- augment(scatter_2021_kmeans4, scatter_2021) %>%
-  arrange(.cluster)
+  mutate(cluster = case_when(.cluster == 1 ~ 2,
+                             .cluster == 2 ~ 3,
+                             .cluster == 3 ~ 4,
+                             .cluster == 4 ~ 1
+  )) %>%
+  select(-.cluster) %>%
+  arrange(cluster) %>%
+  mutate(cluster = as.factor(cluster))
 
 ggplot(scatter_2021_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to make life choices'))) + 
-  geom_point(aes(color = .cluster, shape = .cluster)) +
+  geom_point(aes(color = cluster, shape = cluster)) +
   labs(x = "COVID Cases (per million)",
        y = "Freedom to make life choices score",
        color = "Cluster",
@@ -202,7 +209,7 @@ ggplot(scatter_2021_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
                                        Country == "Venezuela" |
                                        Country == "Senegal",
                                      as.character(Country), "")))
-ggsave("img/freedom_death_cluster21.png")
+ggsave("img/freedom_death_cluster21.png", scale = 0.8)
 
 
 
@@ -235,7 +242,7 @@ ggplot(elbow_plot22, aes(x = k, y = tot.withinss)) +
   scale_x_continuous(breaks = 1:10) +
   labs(x = "Number of clusters (k)", 
        y = "Total within-cluster sum of squares")
-ggsave("img/elbow22.png")
+ggsave("img/elbow22.png", scale = 1)
 
 scatter_2022_kmeans4 <- scatter_scaled_2022 %>% 
   kmeans(centers = 4, nstart = 20)
@@ -244,10 +251,17 @@ scatter_2022_kmeans4_summary <- tidy(scatter_2022_kmeans4)
 names(scatter_2022_kmeans4_summary) = gsub(pattern = "_scaled", replacement = "", x = names(scatter_2022_kmeans4_summary))
 
 scatter_2022_kmeans4_country <- augment(scatter_2022_kmeans4, scatter_2022) %>%
-  arrange(.cluster)
-
+  mutate(cluster = case_when(.cluster == 1 ~ 4,
+                              .cluster == 2 ~ 1,
+                              .cluster == 3 ~ 3,
+                              .cluster == 4 ~ 2
+                              )) %>%
+  select(-.cluster) %>%
+  arrange(cluster) %>%
+  mutate(cluster = as.factor(cluster))
+    
 ggplot(scatter_2022_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to make life choices'))) + 
-  geom_point(aes(color = .cluster, shape = .cluster)) + 
+  geom_point(aes(color = cluster, shape = cluster)) + 
   labs(x = "COVID Cases (per million)",
        y = "Freedom to make life choices score",
        color = "Cluster",
@@ -261,5 +275,5 @@ ggplot(scatter_2022_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
                          Country == "Venezuela" |
                          Country == "Senegal",
                          as.character(Country), "")))
-ggsave("img/freedom_death_cluster22.png")
+ggsave("img/freedom_death_cluster22.png", scale = 0.8)
 
