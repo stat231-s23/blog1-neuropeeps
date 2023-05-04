@@ -4,67 +4,69 @@ library(rvest)
 library(robotstxt)
 library(purrr)
 
-## SWITZERLAND 
+## Function to scrape all 'p' html elements in a page
+scrape_p <- function(url) {
+  # temp stores name of variable
+  temp <- deparse(substitute(url))
+  # scrape
+  url %>%
+    read_html() %>%
+    html_elements("p") %>%
+    html_text2() %>%
+    as.data.frame() %>%
+    rename(quote = ".") %>%
+    mutate(source = temp) %>% # populate new column with source name
+    filter(grepl('[a-zA-Z]', quote)) # filter out any rows without words
+}
 
-# 1. Identify page where poem is listed
-russia_covid_policy_url <- "https://ru.usembassy.gov/covid-19-information/#:~:text=Anyone%20testing%20positive%20for%20COVID,directly%20after%20arrival%20in%20Russia."
-# 2. Confirm bots are allowed to access the page 
-robotstxt::paths_allowed(russia_covid_policy_url)
-# # 3. Get poem text 
-# dear_march <- dear_march_url %>%               
-#   read_html() %>%
-#   html_elements(".poem") %>% 
-#   html_text2() 
+## UK
+uk_url_1 <- "https://www.bma.org.uk/advice-and-support/covid-19/what-the-bma-is-doing/the-public-health-response-by-uk-governments-to-covid-19"
+uk_1_text <- scrape_p(uk_url_1)
 
-# 1. Identify page where poem is listed
-united_states_covid_policy_url <- "https://www.cdc.gov/coronavirus/2019-ncov/cdcresponse/laws-regulations.html"
-# 2. Confirm bots are allowed to access the page 
-robotstxt::paths_allowed(united_states_covid_policy_url)
-# # 3. Get poem text 
-# dear_march <- dear_march_url %>%               
-#   read_html() %>%
-#   html_elements(".poem") %>% 
-#   html_text2() 
+uk_url_2 <- "https://en.wikipedia.org/wiki/COVID-19_pandemic_in_the_United_Kingdom#Government"
+uk_2_text <- scrape_p(uk_url_2)
 
+## SWITZERLAND
+switz_url_1 <- "https://blog.petrieflom.law.harvard.edu/2020/05/14/switzerland-global-responses-covid19/"
+switz_1_text <- scrape_p(switz_url_1) %>%
+  filter(row_number() <= n() - 2)
 
-
-# # Explicitly load `stop_words` into environment
-# data(stop_words)
-# 
-# # First, take a look at the `stop_words` dataset
-# head(stop_words)
-# tail(stop_words)
-# 
-# stop_words %>% 
-#   count(lexicon)
-# 
-# poems_words <- poems_words_all %>%
-#   anti_join(stop_words, by="word")
-
-
-## UNITED KINGDOM
-
-
-
+switz_url_2 <- "https://www.reuters.com/business/healthcare-pharmaceuticals/swiss-government-decides-lift-nearly-all-covid-19-restrictions-2022-02-16/"
+switz_2_text <- scrape_p(switz_url_2) %>%
+  filter(row_number() <= n() - 2)
 
 ## MONGOLIA
+mong_url_1 <- "https://preventepidemics.org/epidemics-that-didnt-happen-2021/covid-19-mongolia/"
+mong_1_text <- scrape_p(mong_url_1) %>%
+  filter(row_number() <= n() - 5)
 
-
-
-
-## SENEGAL 
-
-
-
+## SENEGAL
+sen_url_1 <- "https://preventepidemics.org/epidemics-that-didnt-happen-2021/covid-19-senegal/"
+sen_1_text <- scrape_p(sen_url_1) %>%
+  filter(row_number() <= n() - 5)
 
 ## PANAMA
+pan_url_1 <- "https://www.oecd.org/coronavirus/policy-responses/covid-19-in-latin-america-and-the-caribbean-an-overview-of-government-responses-to-the-crisis-0a2dee41/"
+pan_1_text <- scrape_p(pan_url_1) %>%
+  filter(!grepl('[[]', quote)) %>%
+  filter(row_number() <= n() - 4 & row_number() != 3)
 
+pan_url_2 <- "https://www.atlanticcouncil.org/blogs/new-atlanticist/panamas-coronavirus-response-must-not-affect-constitutional-order/"
+pan_2_text <- scrape_p(pan_url_2) %>%
+  filter(!grepl('By|\\{', quote)) %>%
+  filter(row_number() <= n() - 1)
 
-
-
-## VENEZUALA
-
-
-
+pan_url_3 <- "https://en.wikipedia.org/wiki/COVID-19_pandemic_in_Panama"
+pan_3_text <- scrape_p(pan_url_3)
 
 ## LEBANON
+leb_url_1 <- "https://www.rand.org/blog/2022/05/lebanon-challenges-and-successes-in-covid-19-pandemic.html"
+leb_1_text <- scrape_p(leb_url_1) %>%
+  filter(row_number() > 10) %>%
+  filter(row_number() <= n() - 14)
+
+# concat all scraped websites
+scraped_texts <- rbind(leb_1_text, mong_1_text, pan_1_text, pan_2_text, pan_3_text,
+                       sen_1_text, switz_1_text, switz_2_text, uk_1_text, uk_2_text)
+# save dataset
+saveRDS(scraped_texts, "data/texts.Rds")
