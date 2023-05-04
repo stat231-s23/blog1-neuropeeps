@@ -22,6 +22,7 @@ library(ggplot2)
 library(htmlwidgets)
 library(plotly)
 library(leaflet)
+library(viridis)
 ```
 
 # Intro
@@ -32,8 +33,61 @@ In this project, we examined the relationship between the stringency of a countr
 
 ## Freedom of Countries Accross the World According to the World Happiness Report
 
+```{r}
+# Reads in our world map datasets
+world_happiness_map <- readRDS("data/world_happiness_map.rds") 
+```
 
 
+```{r}
+# world_happiness_map20 <- world_happiness_map %>%
+#    filter(year == 2020)
+
+ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2020"
+       , caption = "Data from Our World in Data and World Happiness Report"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+
+
+```
+
+
+```{r}
+world_happiness_map21 <- world_happiness_map %>%
+  filter(year == 2021)
+
+ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2021"
+       , caption = "Data from Our World in Data and World Happiness Report"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+```
+
+
+```{r}
+# Reads in our world map datasets
+world_happiness_map22 <- world_happiness_map %>%
+  filter(year == 2022)
+
+ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2022"
+       , caption = "Data from Our World in Data and World Happiness Report"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+```
 
 ## Freedom and COVID Cases - Clustering
 
