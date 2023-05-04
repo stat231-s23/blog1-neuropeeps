@@ -25,12 +25,14 @@ library(leaflet)
 library(viridis)
 ```
 
-# Intro
+# Introduction
 
 In this project, we examined the relationship between the stringency of a country's COVID policy, i.e. the relative freedom allowed the people of the country during the COVID pandemic, and the per capita number of COVID cases that occurred in that country. We also observed how the levels of freedom and corresponding COVID case numbers changed over the three year course of the pandemic for which we have data, i.e. how responses shifted from the 2020 beginnings of the pandemic, to 2021, and up to 2022. To do so, we clustered countries by total number of deaths, total number of cases, and overall happiness score, and, based on these groupings at the start of the pandemic (2020 data) chose a country to examine. Additional countries were selected to ensure that nearly all continents (barring Antarctica, Australia, and North America) were included. For a country to be considered for further examination, they had to have data for all three years (no North American Country met this requirement, and thus was excluded) and had to have readily available text resources on their COVID policy. Otherwise, countries were chosen at random in an attempt to encompass a broader range of country experiences. We then performed text analysis on the COVID policies of these chosen countries to identify the most commonly used words in their COVID policies, to examine what regulations were present, and how this might have effected their per capita rate of COVID 19 infection within their country.   
 
 
 # Freedom According to the World Happiness Report vs COVID Cases (Scatterplot)
+
+In the SHINY App portion of our project, we observed (see below) that there appeared to be a relationship where in countries with a higher number of COVID cases appeared to correspond to countries that scored higher on the World Happiness Report in the "Freedom to Make Life Decisions" category. This effect was most pronounced in 2022 (a number of years into the pandemic, indeed the latest year we studied) where the number of cases appeared to increase above levels of 2020 and 2021, particularly in countries with higher "Freedom to Make Life Decision" scores. It occurred to us that in the early year of the pandemic, even countries that typically scored high on the "Freedom to Make Life Decisions" indicators of the World Happiness Report when faced with a never-before-seen threat to their people, may have responded more strictly to the unknown that was the pandemic. However, as time went on, we wondered if perhaps the COVID regulations imposed by various governments were swayed by their more typical "freedom leanings" as measured by the World Happiness Report, and that countries with more "Freedom the Make Life Decisions" relaxed their COVID mandates more quickly, leading to surges in COVID cases during the later years of the pandemic (particularly 2022). This lead us to the desire to look at "Freedom to Make Life Decision Scores" within each country over the course of the pandemic to see if they took into account COVID policy and how they might have changed during the pandemic. 
 
 ```{r, warning = FALSE, message = FALSE}
 scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds") 
@@ -39,10 +41,10 @@ scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds")
            , aes_string( # Maps aesthetics from strings
              x = "`Freedom to make life choices`",
              y = "tot_year_cases",
-             color = "year")) + # Sets deaths or cases as the user chosen y variable
+             color = "year")) + 
       geom_point(size = 1.5) + # Adds points to the plot of size 1.5 and color blue
       labs(x = "Freedom to Make Life Choices Score" # Sets the x axis label
-           , y = "COVID Cases (per million)" # Changes y label based on user choice
+           , y = "COVID Cases (per million)" # Sets the y axis label
            , title = "Country Freedom to Make Life Choices in Relation to COVID19 Cases" # Sets the title
            , subtitle = "Pandemic Years 2020-2022" ) + # Sets the subtitle
       geom_smooth(method = "lm" # Adds line of best fit to the plot
@@ -59,17 +61,38 @@ scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds")
 world_happiness_map <- readRDS("data/world_happiness_map.rds") 
 ```
 
+We first looked at a map of world "Freedom to Make Life Decision" scores in 2019, while COVID-19 was still mainly sequestered in mainland China and not the rest of the country, so that we could examine what various country freedoms looked like prior to the pandemic and compare them to pandemic levels to see how well the Happiness Report measure of "Freedom to Make Life Decisions" captured/accounted for changes in policy based on COVID 19.
 
 ```{r}
-# world_happiness_map20 <- world_happiness_map %>%
-#    filter(year == 2020)
+# world_happiness_map19 <- world_happiness_map %>% 
+#   filter(year == 2019)
 
 ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2019"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+
+```
+
+
+Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decisions Scores" included all the North American countries, Australia, China, India,Saudi Arabia, the Nordic countries, southwest Africa, all of South America except Venezuela, and western Europe. Russia, the countries surrounding it, and Mongolia appeared to remain somewhere mid-pack, while countries on the lower scoring end of the "Freedom to Make Life Decisions" consisted of Venezuela and the majority of the countries in Africa. Scores on the higher end existed in the 0.6-0.7 range, while lower scores hovered around 0.1. Next, we compared these to levels during the pandemic. 
+
+
+```{r}
+ world_happiness_map20 <- world_happiness_map %>%
+    filter(year == 2020)
+
+ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
   labs(title = "World Freedom to Make Life Choices in 2020"
-       , caption = "Data from Our World in Data and World Happiness Report (2020-2023)"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
        , fill = "Freedom to Make Life Choices", "Score") +
   # coloring to make chloropleth more readable
   scale_fill_viridis(option = "mako", direction = -1)
@@ -86,7 +109,7 @@ ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to mak
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
   labs(title = "World Freedom to Make Life Choices in 2021"
-       , caption = "Data from Our World in Data and World Happiness Report"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
        , fill = "Freedom to Make Life Choices", "Score") +
   # coloring to make chloropleth more readable
   scale_fill_viridis(option = "mako", direction = -1)
@@ -103,13 +126,13 @@ ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to mak
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
   labs(title = "World Freedom to Make Life Choices in 2022"
-       , caption = "Data from Our World in Data and World Happiness Report"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
        , fill = "Freedom to Make Life Choices", "Score") +
   # coloring to make chloropleth more readable
   scale_fill_viridis(option = "mako", direction = -1)
 ```
 
-Across years, there appeared to be no great differences between countries in 
+Across the studied years, both when comparing prior to pandemic levels and levels between years in the pandemic, there appeared to be no great differences between the "Freedom to Make Life Decision" score based on the year, suggesting that the World Happiness Report survey perhaps did not measure or account for the changes in the freedom of everyday lives of citizens based on the pandemic, or that freedom levels simply did not change that much over the course of the pandemic, particularly in country relations to one another, though we found this second argument less convincing given personal experiences of the pandemic, and how the freedom of our lives changes (though perhaps our outlooks were shaped by the tight Amherst College restrictions). We decided to investigated country freedom vs. COVID cases using other possible measures: directly through text analysis of the regulations they imposed. First though, we had to decide on representative countries to examine. 
 
 # Freedom and COVID Cases (Clustering)
 
