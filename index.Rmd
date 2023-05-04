@@ -136,11 +136,19 @@ Across the studied years, both when comparing prior to pandemic levels and level
 
 # Freedom and COVID Cases (Clustering)
 
+To pick representative countries to explore, we wanted to cluster countries by their number of COVID cases per million people, their Freedom to Make Life Decisions score, but also, from our original dataset, their Happiness Score and COVID deaths per million people so that our clusters more accurately reflect countries we expect to have had more similar outlooks on life, and in particular, on COVID 19 regulations. We began this process with the year 2020 -- the start of the pandemic. We decided on creating four clusters as creation of an elbow plot (see below) suggested we should. 
+
+```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
+knitr::include_graphics("img/elbow20.png")
+```
+
+The clusters for 2020, on a plot of COVID Cases vs Freedom to Make Life Decisions score are depicted below.
+
 ```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster20.png")
 ```
 
-We chose to study the countries Lebanon and Mongolia (Asia), Venezuela and Panama (South America), Senegal (Africa), as well as the United Kingdom and Switzerland (Europe). 
+In our selection of countries, we attempted to chose one country from each of our four clusters. The four clusters were characterized by these attributes. Group 1 (displayed as pink dots) were characterized by high (the highest) Freedom to Make Life Decision scores but low COVID case rates. As a sampling, Group 1 included countries such as Switzerland, Norway, Sweden, New Zealand, Israel, Saudi Arabia, Poland, Jamaica, Japan, etc., a group that can be roughly characterized as rather small, isolated, more well-to-do, more liberal countries. Group 2 (displayed as green triangles) were countries of middling Freedom to Make Life Decisions Scores lower than those of Group 1, but they had similar rates of COVID cases. To give a sampling of the countries, Russia, Mongolia, Senegal, Libya, Kenya, Egypt, etc. were included. We chose to study the countries Lebanon and Mongolia (Asia), Venezuela and Panama (South America), Senegal (Africa), as well as the United Kingdom and Switzerland (Europe). 
 
 ```{r, fig.cap='2021 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster21.png")
