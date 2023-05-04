@@ -276,4 +276,5 @@ ggplot(scatter_2022_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
                          Country == "Senegal",
                          as.character(Country), "")))
 ggsave("img/freedom_death_cluster22.png", scale = 0.8)
+# 
 
