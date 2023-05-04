@@ -2,7 +2,7 @@
 title: "Tracking COVID Cases in Relation to Country Freedom"
 subtitle: "Over the Course of the COVID-19 Pandemic"
 author: "Alex Yan and Lily Wickland Shearer"
-date: "May 9th, 2023"
+date: "Due; May 9th, 2023"
 output:
   rmdformats::readthedown:
     highlight: "kate"
@@ -29,9 +29,8 @@ library(viridis)
 
 In this project, we examined the relationship between the stringency of a country's COVID policy, i.e. the relative freedom allowed the people of the country during the COVID pandemic, and the per capita number of COVID cases that occurred in that country. We also observed how the levels of freedom and corresponding COVID case numbers changed over the three year course of the pandemic for which we have data, i.e. how responses shifted from the 2020 beginnings of the pandemic, to 2021, and up to 2022. To do so, we clustered countries by total number of deaths, total number of cases, and overall happiness score, and, based on these groupings at the start of the pandemic (2020 data) chose a country to examine. Additional countries were selected to ensure that nearly all continents (barring Antarctica, Australia, and North America) were included. For a country to be considered for further examination, they had to have data for all three years (no North American Country met this requirement, and thus was excluded) and had to have readily available text resources on their COVID policy. Otherwise, countries were chosen at random in an attempt to encompass a broader range of country experiences. We then performed text analysis on the COVID policies of these chosen countries to identify the most commonly used words in their COVID policies, to examine what regulations were present, and how this might have effected their per capita rate of COVID 19 infection within their country.   
 
-# Content
 
-## Freedom According to the World Happiness Report vs COVID Cases
+# Freedom According to the World Happiness Report vs COVID Cases (Scatterplot)
 
 ```{r, warning = FALSE, message = FALSE}
 scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds") 
@@ -53,7 +52,7 @@ scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds")
 ```
 
 
-## Freedom of Countries Accross the World According to the World Happiness Report
+# Freedom of Countries Accross the World According to the World Happiness Report (Maps)
 
 ```{r}
 # Reads in our world map datasets
@@ -112,7 +111,7 @@ ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to mak
 
 Across years, there appeared to be no great differences between countries in 
 
-## Freedom and COVID Cases - Clustering
+# Freedom and COVID Cases (Clustering)
 
 ```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster20.png")
