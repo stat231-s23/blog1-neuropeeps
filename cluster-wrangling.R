@@ -3,6 +3,8 @@ library(kableExtra)
 library(ggrepel)
 library(broom)
 library(GGally)
+library(ggplot2)
+library(ggrepel)
 
 # Alex Yan and Lily Wickland Shearer
 # data from shiny project
@@ -90,7 +92,7 @@ scatter_2020 <- filter(scatterplot_data, year == 2020) %>%
 set.seed(23)
 
 # generate elbow plot data
-elbow_plot <- tibble(k = 1:10) %>%
+elbow_plot20 <- tibble(k = 1:10) %>%
   mutate(
     kmeans_results = purrr::map(k, ~kmeans(scatter_scaled_2020, .x)),
     # List-column of "glanced" model summaries for each kmeans object
@@ -100,13 +102,13 @@ elbow_plot <- tibble(k = 1:10) %>%
   unnest(cols = c(glanced))
 
 # Construct elbow plot
-ggplot(elbow_plot, aes(x = k, y = tot.withinss)) +
+ggplot(elbow_plot20, aes(x = k, y = tot.withinss)) +
   geom_point() + 
   geom_line() +
   scale_x_continuous(breaks = 1:10) +
   labs(x = "Number of clusters (k)", 
        y = "Total within-cluster sum of squares")
-ggsave("img/elbow.png")
+ggsave("img/elbow20.png")
 
 scatter_2020_kmeans4 <- scatter_scaled_2020 %>% 
   kmeans(centers = 4, nstart = 20)
@@ -132,8 +134,16 @@ ggplot(scatter_2020_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
        y = "Freedom to make life choices score",
        color = "Cluster",
        shape = "Cluster") +
-  theme_classic()
-ggsave("img/freedom_death_cluster20")
+  theme_classic() +
+  geom_text_repel(aes(label = ifelse(Country == "Lebanon" | 
+                                       Country == "Switzerland" | 
+                                       Country == "United Kingdom" |
+                                       Country == "Panama" |
+                                       Country == "Mongolia" |
+                                       Country == "Venezuela" |
+                                       Country == "Senegal",
+                                     as.character(Country), "")))
+ggsave("img/freedom_death_cluster20.png")
 
 
 
@@ -183,8 +193,16 @@ ggplot(scatter_2021_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to
        y = "Freedom to make life choices score",
        color = "Cluster",
        shape = "Cluster") +
-  theme_classic()
-ggsave("img/freedom_death_cluster21")
+  theme_classic() +
+  geom_text_repel(aes(label = ifelse(Country == "Lebanon" | 
+                                       Country == "Switzerland" | 
+                                       Country == "United Kingdom" |
+                                       Country == "Panama" |
+                                       Country == "Mongolia" |
+                                       Country == "Venezuela" |
+                                       Country == "Senegal",
+                                     as.character(Country), "")))
+ggsave("img/freedom_death_cluster21.png")
 
 
 
@@ -229,11 +247,19 @@ scatter_2022_kmeans4_country <- augment(scatter_2022_kmeans4, scatter_2022) %>%
   arrange(.cluster)
 
 ggplot(scatter_2022_kmeans4_country, aes(x = tot_year_cases, y = get('Freedom to make life choices'))) + 
-  geom_point(aes(color = .cluster, shape = .cluster)) +
+  geom_point(aes(color = .cluster, shape = .cluster)) + 
   labs(x = "COVID Cases (per million)",
        y = "Freedom to make life choices score",
        color = "Cluster",
        shape = "Cluster") +
-  theme_classic()
-ggsave("img/freedom_death_cluster22")
+  theme_classic() +
+  geom_text_repel(aes(label = ifelse(Country == "Lebanon" | 
+                         Country == "Switzerland" | 
+                         Country == "United Kingdom" |
+                         Country == "Panama" |
+                         Country == "Mongolia" |
+                         Country == "Venezuela" |
+                         Country == "Senegal",
+                         as.character(Country), "")))
+ggsave("img/freedom_death_cluster22.png")
 
