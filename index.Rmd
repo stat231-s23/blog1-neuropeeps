@@ -160,10 +160,9 @@ Below is a plot of the 2021 COVID Cases vs Freedom to Make Life Choices/Decision
 knitr::include_graphics("img/freedom_death_cluster21.png")
 ```
 
-2021 appeared to bring about an increase in COVID cases globally (or at least an increase in reported cases), as we see the pink dots of Group 1 shifting out to the right, indicating an uptick in COVID cases in many countries, though they still maintain their high Freedom to Make Life Decisions score. Group 3 (blue rectangles) now consists of countries with middling Freedom to Make Life Decisions scores, and high COVID Case scores. Groups 2 and 4 however maintained the same characteristics of 2020. Note that the groupings of countries did NOT remain the same from 2020 to 2021. Several countries switched groups for one reason or another. We tracked these switches for our countries of interest.For example, note that the United Kingdom and 
+2021 appeared to bring about an increase in COVID cases globally (or at least an increase in reported cases), as we see the pink dots of Group 1 shifting out to the right, indicating an uptick in COVID cases in many countries, though they still maintain their high Freedom to Make Life Decisions score. Group 3 (blue rectangles) now consists of countries with middling Freedom to Make Life Decisions scores, and high COVID Case scores. Groups 2 and 4 however maintained the same characteristics of 2020. Note that the groupings of countries did NOT remain the same from 2020 to 2021. Several countries switched groups for one reason or another. We tracked these switches for our countries of interest. 2020 (below) appeared to further increase COVID cases across the globe. 
 
 ```{r, fig.cap='2022 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster22.png")
 ```
-
 
