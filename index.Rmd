@@ -136,7 +136,7 @@ Across the studied years, both when comparing prior to pandemic levels and level
 
 # Freedom and COVID Cases (Clustering)
 
-To pick representative countries to explore, we wanted to cluster countries by their number of COVID cases per million people, their Freedom to Make Life Decisions score, but also, from our original dataset, their Happiness Score and COVID deaths per million people so that our clusters more accurately reflect countries we expect to have had more similar outlooks on life, and in particular, on COVID 19 regulations. We began this process with the year 2020 -- the start of the pandemic. We decided on creating four clusters as creation of an elbow plot (see below) suggested we should. 
+To pick representative countries to explore, we wanted to cluster countries by their number of COVID cases per million people, their Freedom to Make Life Decisions score, but also, from our original dataset, their Happiness Score and COVID deaths per million people so that our clusters more accurately reflect countries we expect to have had more similar outlooks on life, and in particular, on COVID 19 regulations. All measurements were standardized so that they would be weighted equally. We began this process with the year 2020 -- the start of the pandemic. We decided on creating four clusters as creation of an elbow plot (see below) suggested we should. 
 
 ```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/elbow20.png")
@@ -152,11 +152,15 @@ In our selection of countries, we attempted to chose one country from each of ou
 
 In addition to taking in 2020 clusters to track over time and to track their explicit regulations, we also attempted to chose countries from as many continents as possible in an attempt to get a broader view of global responses. We were also limited in our selection by the quality of the resources we could find to mine for text data on their regulations and policies. We intentionally also chose a mix of country sizes in, again, and attempt to get a sense of what COVID was like in as wide a range of experiences as possible to get a better global picture. 
 
-In the end, we chose to study the countries Lebanon and Mongolia (Asia), Venezuela and Panama (South America), Senegal (Africa), as well as the United Kingdom and Switzerland (Europe). 
+In the end, we chose to study the countries Lebanon and Mongolia (Asia), Venezuela and Panama (South America), Senegal (Africa), as well as the United Kingdom and Switzerland (Europe). These are labeled with text on the plot above. 
+
+Below is a plot of the 2021 COVID Cases vs Freedom to Make Life Choices/Decisions scores, clustered based on the same criteria as that of the 2020 clustering. 
 
 ```{r, fig.cap='2021 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster21.png")
 ```
+
+2021 appeared to bring about an increase in COVID cases globally (or at least an increase in reported cases), as we see the pink dots of Group 1 shifting out to the right, indicating an uptick in COVID cases in many countries, though they still maintain their high Freedom to Make Life Decisions score. Group 3 (blue rectangles) now consists of countries with middling Freedom to Make Life Decisions scores, and high COVID Case scores. Groups 2 and 4 however maintained the same characteristics of 2020. Note that the groupings of countries did NOT remain the same from 2020 to 2021. Several countries switched groups for one reason or another. We tracked these switches for our countries of interest.For example, note that the United Kingdom and 
 
 ```{r, fig.cap='2022 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
 knitr::include_graphics("img/freedom_death_cluster22.png")
