@@ -332,4 +332,22 @@ text_words_freq %>%
 
 # References
 
+<!-- Textbook -->
+Baumer, B. S., Kaplan, D. T., and Horton, N. J. (2021), *Modern Data Science with R* (2nd ed.), Boca Raton, FL: CRC Press.
 
+<!-- Websites -->
+Columbia University Libraries (n.d.), "Data Citation," available at <https://guides.library.columbia.edu/datacitation>.
+
+
+
+
+<!-- Datasets -->
+Caesar, Mario. (May 9th, 2023), "Our World in Data - COVID-19", *Kaggle*, available at <https://www.kaggle.com/datasets/caesarmario/our-world-in-data-covid19-dataset>
+
+Singh, Ajaypal. (2022), "world happiness report 2022", *Kaggle*, available at <https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2022>
+
+Singh, Ajaypal. (2021), "World Happiness Report 2021", *Kaggle*, available at <https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2021>
+
+Helliwell, John F. Layard, Richard. Sachs, Jeffrey. (2020), "World Happiness Report 2020", *Kaggle*, available at <https://www.kaggle.com/datasets/londeen/world-happiness-report-2020>
+
+Sustainable Development Solutions Network. (2020), "World Happiness Report", *Kaggle*, available at <https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv>
