@@ -338,6 +338,27 @@ Baumer, B. S., Kaplan, D. T., and Horton, N. J. (2021), *Modern Data Science wit
 <!-- Websites -->
 Columbia University Libraries (n.d.), "Data Citation," available at <https://guides.library.columbia.edu/datacitation>.
 
+Mehlmann-Wicks, Jackie. (July 28th, 2022), “The Public Health Response by UK Governments to COVID-19.”, The British Medical Association Is the Trade Union and Professional Body for Doctors in the UK., available at <https://www.bma.org.uk/advice-and-support/covid-19/what-the-bma-is-doing/the-public-health-response-by-uk-governments-to-covid-19> \. 
+
+Staff, The Petrie-Flom Center. (August 19th, 2020), “Switzerland’s Response to the COVID-19 Pandemic.” Bill of Health, available at  <https://blog.petrieflom.law.harvard.edu/2020/05/14/switzerland-global-responses-covid19/>. 
+
+Person. (Febuary 16th, 2022, “Swiss Government Lifts Nearly All COVID-19 Restrictions.” Reuters, available at <https://www.reuters.com/business/healthcare-pharmaceuticals/swiss-government-decides-lift-nearly-all-covid-19-restrictions-2022-02-16/>. 
+
+“Epidemics That Didn’t Happen: Covid-19 in Mongolia.” (n.d.) Epidemics That Didn’t Happen | COVID-19 in Mongolia, available at  <https://preventepidemics.org/epidemics-that-didnt-happen-2021/covid-19-mongolia/>.  
+
+OECD Policy Responses to Coronavirus (COVID-19), (n.d.), available at <https://www.oecd.org/coronavirus/en/policy-responses>. 
+
+Wemer, David. (April 7th, 2020), “Panama’s Coronavirus Response Must Not Affect Constitutional Order.” Atlantic Council, available at <https://www.atlanticcouncil.org/blogs/new-atlanticist/panamas-coronavirus-response-must-not-affect-constitutional-order/>. 
+
+Abou Hassan, Farouk F, et al. (January 16th, 2023) “Response to Covid-19 in Lebanon: Update, Challenges and Lessons Learned.” Epidemiology and Infection, available at <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9947038/>. 
+
+“A Crisis within a Crisis: Venezuela and Covid-19.” (n.d.), Wilson Center,available at <https://www.wilsoncenter.org/publication/crisis-within-crisis-venezuela-and-covid-19>. 
+
+“Venezuela.” (n.d.), KPMG, avaialable at  <https://kpmg.com/xx/en/home/insights/2020/04/venezuela-government-and-institution-measures-in-response-to-covid.html>. 
+
+"The Pandemic Accelerates Venezuela’s Transformation into a Police State ..." (n.d.), available at <https://carnegieendowment.org/2020/12/17/pandemic-accelerates-venezuela-s-transformation-into-police-state-pub-83474>. 
+
+Rendon, Moises, and Lucan Sanchez. (n.d.), “Covid-19 in Venezuela: How the Pandemic Deepened a Humanitarian Crisis.” CSIS, available at <https://www.csis.org/analysis/covid-19-venezuela-how-pandemic-deepened-humanitarian-crisis.>. 
 
 
 
