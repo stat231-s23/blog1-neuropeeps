@@ -25,11 +25,13 @@ library(leaflet)
 library(viridis)
 library(htmlwidgets)
 library(plotly)
+library(gganimate)
 ```
 
 # Introduction
 
-```{r, fig.cap='COVID-19 Virus. Taken from the Center for Disease Control and Prevention.', out.width="100%", fig.align="center"}
+```{r, fig.cap='SARS-CoV-2 Virus. Taken from the Center for Disease Control and Prevention.', out.width="100%", fig.align="center"}
+# Adds picture of COVID virus
 knitr::include_graphics("img/covid_virus_pic.avif")
 ```
 
@@ -47,10 +49,10 @@ scatterplot_data <- readRDS("data/scatterplot_data_without_2019.rds")
 # Making the scatterplot
 cases_vs_freedom_plot <- ggplot(data = scatterplot_data 
            , aes_string( # Maps aesthetics from strings
-             x = "`Freedom to make life choices`",
-             y = "tot_year_cases",
-             color = "year",
-             label = "Country")) + 
+             x = "`Freedom to make life choices`", # Maps x variable to Freedom to make life choice
+             y = "tot_year_cases", # Maps y variable to COVID Cases per million
+             color = "year", # Maps color to year
+             label = "Country")) + # Maps label to country
       geom_point(size = 1.5) + # Adds points to the plot of size 1.5 and color blue
       labs(x = "Freedom to Make Life Choices Score" # Sets the x axis label
            , y = "COVID Cases (per million)" # Sets the y axis label
@@ -61,7 +63,9 @@ cases_vs_freedom_plot <- ggplot(data = scatterplot_data
                   , se = FALSE # Gets rid of confidence interval
                   , na.rm = TRUE) # Gets rid of any missing values without a warning
 
-ggplotly(cases_vs_freedom_plot, tooltip = "Country") 
+ggplotly(cases_vs_freedom_plot, tooltip = "Country") # Makes plot interactive so 
+#user can brush over point and see what country it belongs to and year (based on color)
+
 ```
 
 
@@ -75,9 +79,6 @@ world_happiness_map <- readRDS("data/world_happiness_map.rds")
 We first looked at a map of world "Freedom to Make Life Decision" scores in 2019, while COVID-19 was still mainly sequestered in mainland China and not the rest of the country, so that we could examine what various country freedoms looked like prior to the pandemic and compare them to pandemic levels to see how well the Happiness Report measure of "Freedom to Make Life Decisions" captured/accounted for changes in policy based on COVID 19.
 
 ```{r}
-# world_happiness_map19 <- world_happiness_map %>% 
-#   filter(year == 2019)
-
 ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
@@ -88,7 +89,7 @@ ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make 
   # coloring to make chloropleth more readable
   scale_fill_viridis(option = "mako", direction = -1)
 
-ggplotly()
+
 ```
 
 
@@ -99,7 +100,7 @@ Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decision
 world_happiness_map20 <- world_happiness_map %>%
     filter(year == 2020)
 
-ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
+freedom_map_20 <- ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
@@ -116,7 +117,7 @@ ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to mak
 world_happiness_map21 <- world_happiness_map %>%
   filter(year == 2021)
 
-ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
+freedom_map_21 <- ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
@@ -133,7 +134,7 @@ ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to mak
 world_happiness_map22 <- world_happiness_map %>%
   filter(year == 2022)
 
-ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
+freedom_map_21 <- ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
