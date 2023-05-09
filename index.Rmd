@@ -26,6 +26,7 @@ library(viridis)
 library(htmlwidgets)
 library(plotly)
 library(gganimate)
+library(wordcloud)
 ```
 
 # Introduction
@@ -204,8 +205,130 @@ knitr::include_graphics("img/freedom_death_cluster21.png")
 knitr::include_graphics("img/freedom_death_cluster22.png")
 ```
 
-# 
+# COVID Policies {.tabset .tabset-pills}
+```{r, echo = FALSE}
+# set seed and colorscheme for wordcloud
+set.seed(15)
+my_palette2 <- brewer.pal(8, "Dark2")
 
+# load data
+text_words_freq <- readRDS("data/text_words_freq.Rds")
+```
+
+## UK COVID Policy Wordcloud
+```{r, fig.cap='UK COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "uk") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 10,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Lebanon COVID Policy Wordcloud
+```{r, fig.cap='Lebanon COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "leb") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 3,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Mongolia COVID Policy Wordcloud
+```{r, fig.cap='Mongolia COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "mong") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Senegal COVID Policy Wordcloud
+```{r, fig.cap='Senegal COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "sen") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Panama COVID Policy Wordcloud
+```{r, fig.cap='Panama COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "pan") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 12,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Switzerland COVID Policy Wordcloud
+```{r, fig.cap='Switzerland COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "switz") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
 # Conclusion
 
 # References
