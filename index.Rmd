@@ -26,6 +26,7 @@ library(viridis)
 library(htmlwidgets)
 library(plotly)
 library(gganimate)
+library(wordcloud)
 ```
 
 # Introduction
@@ -97,77 +98,77 @@ Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decision
 
 
 ```{r}
-world_happiness_map20 <- world_happiness_map %>%
-    filter(year == 2020)
-
-ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
-  geom_sf()+
-  theme_void() + # removes axes
-  # more informative plot/legend/caption titles
-  labs(title = "World Freedom to Make Life Choices in 2020"
-       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-       , fill = "Freedom to Make Life Choices", "Score") +
-  # coloring to make chloropleth more readable
-  scale_fill_viridis(option = "mako", direction = -1)
-
-```
-
-
-```{r}
-world_happiness_map21 <- world_happiness_map %>%
-  filter(year == 2021)
-
-ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
-  geom_sf()+
-  theme_void() + # removes axes
-  # more informative plot/legend/caption titles
-  labs(title = "World Freedom to Make Life Choices in 2021"
-       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-       , fill = "Freedom to Make Life Choices", "Score") +
-  # coloring to make chloropleth more readable
-  scale_fill_viridis(option = "mako", direction = -1)
-```
-
-
-```{r}
-# Reads in our world map datasets
-world_happiness_map22 <- world_happiness_map %>%
-  filter(year == 2022)
-
-ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
-  geom_sf()+
-  theme_void() + # removes axes
-  # more informative plot/legend/caption titles
-  labs(title = "World Freedom to Make Life Choices in 2022"
-       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-       , fill = "Freedom to Make Life Choices", "Score") +
-  # coloring to make chloropleth more readable
-  scale_fill_viridis(option = "mako", direction = -1)
-```
-
-```{r}
-# # Reads in our world map datasets
+# world_happiness_map20 <- world_happiness_map %>%
+#     filter(year == 2020)
 # 
-# freedom_map <- ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
+# freedom_map_20 <- ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
 #   geom_sf()+
 #   theme_void() + # removes axes
 #   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choice"
+#   labs(title = "World Freedom to Make Life Choices in 2020"
 #        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
 #        , fill = "Freedom to Make Life Choices", "Score") +
 #   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1) 
+#   scale_fill_viridis(option = "mako", direction = -1)
+
+```
+
+
+```{r}
+# world_happiness_map21 <- world_happiness_map %>%
+#   filter(year == 2021)
 # 
-# # Creates animation object of the freedom map
-# freedom_map_animation <- freedom_map + 
-#   transition_states(
-#     year, # Animates based on year
-#     transition_length = 1, # Sets transition length of 1
-#     state_length = 5 # Sets statelength to 5
-#   )
+# freedom_map_21 <- ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
+#   geom_sf()+
+#   theme_void() + # removes axes
+#   # more informative plot/legend/caption titles
+#   labs(title = "World Freedom to Make Life Choices in 2021"
+#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+#        , fill = "Freedom to Make Life Choices", "Score") +
+#   # coloring to make chloropleth more readable
+#   scale_fill_viridis(option = "mako", direction = -1)
+```
+
+
+```{r}
+# # Reads in our world map datasets
+# world_happiness_map22 <- world_happiness_map %>%
+#   filter(year == 2022)
 # 
-# # Runs the animation
-# animate(freedom_map_animation, height = 400, width = 800) 
+# freedom_map_21 <- ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
+#   geom_sf()+
+#   theme_void() + # removes axes
+#   # more informative plot/legend/caption titles
+#   labs(title = "World Freedom to Make Life Choices in 2022"
+#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+#        , fill = "Freedom to Make Life Choices", "Score") +
+#   # coloring to make chloropleth more readable
+#   scale_fill_viridis(option = "mako", direction = -1)
+```
+
+```{r}
+# Reads in our world map datasets
+
+freedom_map <- ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choice"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1) 
+
+# Creates animation object of the freedom map
+freedom_map_animation <- freedom_map + 
+  transition_states(
+    year, # Animates based on year
+    transition_length = 1, # Sets transition length of 1
+    state_length = 5 # Sets statelength to 5
+  )
+
+# Runs the animation
+animate(freedom_map_animation, height = 400, width = 800) 
 ```
 
 Across the studied years, both when comparing prior to pandemic levels and levels between years in the pandemic, there appeared to be no great differences between the "Freedom to Make Life Decision" score based on the year, suggesting that the World Happiness Report survey perhaps did not measure or account for the changes in the freedom of everyday lives of citizens based on the pandemic, or that freedom levels simply did not change that much over the course of the pandemic, particularly in country relations to one another, though we found this second argument less convincing given personal experiences of the pandemic, and how the freedom of our lives changes (though perhaps our outlooks were shaped by the tight Amherst College restrictions). We decided to investigated country freedom vs. COVID cases using other possible measures: directly through text analysis of the regulations they imposed. First though, we had to decide on representative countries to examine. 
@@ -204,20 +205,132 @@ knitr::include_graphics("img/freedom_death_cluster21.png")
 knitr::include_graphics("img/freedom_death_cluster22.png")
 ```
 
-# Country Freedom According to Policy (Text Analysis)
+# COVID Policies {.tabset .tabset-pills}
+```{r, echo = FALSE}
+# set seed and colorscheme for wordcloud
+set.seed(15)
+my_palette2 <- brewer.pal(8, "Dark2")
 
+# load data
+text_words_freq <- readRDS("data/text_words_freq.Rds")
+```
 
+## UK COVID Policy Wordcloud
+```{r, fig.cap='UK COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "uk") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 10,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Lebanon COVID Policy Wordcloud
+```{r, fig.cap='Lebanon COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "leb") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 3,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Mongolia COVID Policy Wordcloud
+```{r, fig.cap='Mongolia COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "mong") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Senegal COVID Policy Wordcloud
+```{r, fig.cap='Senegal COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "sen") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Panama COVID Policy Wordcloud
+```{r, fig.cap='Panama COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "pan") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 12,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
+## Switzerland COVID Policy Wordcloud
+```{r, fig.cap='Switzerland COVID Policy Wordcloud', out.width="100%", fig.align="center"}
+# filter data by country, then make wordcloud
+text_words_freq %>%
+  filter(source == "switz") %>%
+  with(wordcloud(words = word,
+                 freq = n,
+                 min.freq = 4,
+                 max.words = 100,
+                 # Plot the words in a random order
+                 random.order = TRUE,
+                 # Specify the range of the size of the words
+                 scale = c(2, 0.3),
+                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
+                 # Color words from least to most frequent
+                 colors = my_palette2,
+                 # Change font family
+                 family = "sans"))
+```
 # Conclusion
-
 
 # References
 
-<!-- Textbook -->
-Baumer, B. S., Kaplan, D. T., and Horton, N. J. (2021), *Modern Data Science with R* (2nd ed.), Boca Raton, FL: CRC Press.
-
-<!-- Website -->
-Columbia University Libraries (n.d.), "Data Citation," available at <https://guides.library.columbia.edu/datacitation>.
-
-<!-- Dataset -->
-Shah, Syed A. A. (October 2022), "Starbucks Drinks" (Version 1), *Kaggle*, available at <https://www.kaggle.com/datasets/syedasimalishah/starbucks-drinks>.
 

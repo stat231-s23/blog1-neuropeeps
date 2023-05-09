@@ -39,6 +39,8 @@ for(i in 1:length(countries)) {
   text_words_freq <- rbind(text_words_freq, temp)
 }
 
+saveRDS(text_words_freq, "data/text_words_freq.Rds")
+
 # set seed and colorscheme for wordcloud
 set.seed(15)
 my_palette2 <- brewer.pal(10, "Dark2")
