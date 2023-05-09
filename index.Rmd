@@ -97,77 +97,77 @@ Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decision
 
 
 ```{r}
-# world_happiness_map20 <- world_happiness_map %>%
-#     filter(year == 2020)
-# 
-# freedom_map_20 <- ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2020"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
+world_happiness_map20 <- world_happiness_map %>%
+    filter(year == 2020)
 
-```
-
-
-```{r}
-# world_happiness_map21 <- world_happiness_map %>%
-#   filter(year == 2021)
-# 
-# freedom_map_21 <- ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2021"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
-```
-
-
-```{r}
-# # Reads in our world map datasets
-# world_happiness_map22 <- world_happiness_map %>%
-#   filter(year == 2022)
-# 
-# freedom_map_21 <- ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2022"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
-```
-
-```{r}
-# Reads in our world map datasets
-
-freedom_map <- ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
+ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
   # more informative plot/legend/caption titles
-  labs(title = "World Freedom to Make Life Choice"
+  labs(title = "World Freedom to Make Life Choices in 2020"
        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
        , fill = "Freedom to Make Life Choices", "Score") +
   # coloring to make chloropleth more readable
-  scale_fill_viridis(option = "mako", direction = -1) 
+  scale_fill_viridis(option = "mako", direction = -1)
 
-# Creates animation object of the freedom map
-freedom_map_animation <- freedom_map + 
-  transition_states(
-    year, # Animates based on year
-    transition_length = 1, # Sets transition length of 1
-    state_length = 5 # Sets statelength to 5
-  )
+```
 
-# Runs the animation
-animate(freedom_map_animation, height = 400, width = 800) 
+
+```{r}
+world_happiness_map21 <- world_happiness_map %>%
+  filter(year == 2021)
+
+ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2021"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+```
+
+
+```{r}
+# Reads in our world map datasets
+world_happiness_map22 <- world_happiness_map %>%
+  filter(year == 2022)
+
+ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
+  geom_sf()+
+  theme_void() + # removes axes
+  # more informative plot/legend/caption titles
+  labs(title = "World Freedom to Make Life Choices in 2022"
+       , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+       , fill = "Freedom to Make Life Choices", "Score") +
+  # coloring to make chloropleth more readable
+  scale_fill_viridis(option = "mako", direction = -1)
+```
+
+```{r}
+# # Reads in our world map datasets
+# 
+# freedom_map <- ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
+#   geom_sf()+
+#   theme_void() + # removes axes
+#   # more informative plot/legend/caption titles
+#   labs(title = "World Freedom to Make Life Choice"
+#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
+#        , fill = "Freedom to Make Life Choices", "Score") +
+#   # coloring to make chloropleth more readable
+#   scale_fill_viridis(option = "mako", direction = -1) 
+# 
+# # Creates animation object of the freedom map
+# freedom_map_animation <- freedom_map + 
+#   transition_states(
+#     year, # Animates based on year
+#     transition_length = 1, # Sets transition length of 1
+#     state_length = 5 # Sets statelength to 5
+#   )
+# 
+# # Runs the animation
+# animate(freedom_map_animation, height = 400, width = 800) 
 ```
 
 Across the studied years, both when comparing prior to pandemic levels and levels between years in the pandemic, there appeared to be no great differences between the "Freedom to Make Life Decision" score based on the year, suggesting that the World Happiness Report survey perhaps did not measure or account for the changes in the freedom of everyday lives of citizens based on the pandemic, or that freedom levels simply did not change that much over the course of the pandemic, particularly in country relations to one another, though we found this second argument less convincing given personal experiences of the pandemic, and how the freedom of our lives changes (though perhaps our outlooks were shaped by the tight Amherst College restrictions). We decided to investigated country freedom vs. COVID cases using other possible measures: directly through text analysis of the regulations they imposed. First though, we had to decide on representative countries to examine. 
@@ -204,10 +204,20 @@ knitr::include_graphics("img/freedom_death_cluster21.png")
 knitr::include_graphics("img/freedom_death_cluster22.png")
 ```
 
-# 
+# Country Freedom According to Policy (Text Analysis)
+
 
 # Conclusion
 
+
 # References
 
+<!-- Textbook -->
+Baumer, B. S., Kaplan, D. T., and Horton, N. J. (2021), *Modern Data Science with R* (2nd ed.), Boca Raton, FL: CRC Press.
+
+<!-- Website -->
+Columbia University Libraries (n.d.), "Data Citation," available at <https://guides.library.columbia.edu/datacitation>.
+
+<!-- Dataset -->
+Shah, Syed A. A. (October 2022), "Starbucks Drinks" (Version 1), *Kaggle*, available at <https://www.kaggle.com/datasets/syedasimalishah/starbucks-drinks>.
 
