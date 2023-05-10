@@ -148,7 +148,7 @@ Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decision
 #   scale_fill_viridis(option = "mako", direction = -1)
 ```
 
-```{r, eval = FALSE}
+```{r}
 world_happiness_map_ggplot <- ggplot(data = world_happiness_map2
        , aes(x = long, y = lat, group = group
              , fill = `freedom to make choices`)) +
