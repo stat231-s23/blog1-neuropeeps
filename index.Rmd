@@ -171,7 +171,9 @@ my_palette2 <- brewer.pal(8, "Dark2")
 text_words_freq <- readRDS("data/text_words_freq.Rds")
 ```
 
-## UK COVID Policy Wordcloud
+The following word clouds display the top words used in news articles and reviews of each country's COVID policies. By studying these word clouds, we can identify if COVID restrictions may have an effect on a country's COVID cases or freedom scores.
+
+## UK
 ```{r, fig.cap='UK COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -190,7 +192,10 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-## Lebanon COVID Policy Wordcloud
+
+As seen in ur clustering data, the UK stayed in cluster 1. This means that the UK maintained relatively high freedom scores and middling covid case counts throughout the pandemic. The word cloud shows that words like 'pandemic', 'restrictions', 'health', and 'deaths' are emphasized in UK COVID policies, which are mostly associated with negativity. Thus, it does not reflect the UK's ability to maintain high freedom scores throughout the pandemic.
+
+## Lebanon
 ```{r, fig.cap='Lebanon COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -209,7 +214,9 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-## Mongolia COVID Policy Wordcloud
+Lebanon maintained its position in cluster 4, which consists of the countries with the lowest freedom scores, but also with the lowest number of COVID cases. The word cloud emphasizes words like 'health','care','medical','successful', which could be related to the low number of COVID cases in Lebanon. However, there is no correlation between the low freedom score in Lebanon and the words used in news articles about its COVID policy.
+
+## Mongolia
 ```{r, fig.cap='Mongolia COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -228,7 +235,9 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-## Senegal COVID Policy Wordcloud
+Mongolia traveled through three different clusters between 2020 and 2022, maintaining a middling freedom score while the number of COVID cases increased drastically in 2021. Words like 'emergency', 'public', 'outbreak' could point to this drastic increase in COVID cases. Unlike the other wordclouds, 'quarantine' appears in an analysis of Mongolia's COVID policy, which could be a reason for its middling freedom score. However, freedom score is still only loosely correlated with these words.
+
+## Senegal
 ```{r, fig.cap='Senegal COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -247,7 +256,9 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-## Panama COVID Policy Wordcloud
+Senegal moved from cluster 4 in 2020 to cluster 3 in 2021, which means it maintained low COVID cases while moving up in freedom score. Like the other word clouds, Senegal's change in freedom score is not reflected in the highlighted words. However, the maintenance of low numbers of COVID cases could be reflected in words such as 'response', 'measures', 'testing', and 'vaccines'.
+
+## Panama
 ```{r, fig.cap='Panama COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -266,7 +277,10 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-## Switzerland COVID Policy Wordcloud
+Panama moved from cluster 3 to cluster 2 between 2020 and 2022, so it's freedom score stayed similar while its number of COVID cases decreased. One of the most frequent words found in reports of Panama's COVID policy was 'confinement', but there was little change in Panama's freedom score. This points toward the conclusion that word usage in COVID policy is not reflected in a country's freedom score. Perhaps the survey question about freedom is worded in such a way that peoples' answers are not affected by COVID.
+Also, Panama's word cloud is unique in that it features many words about money, including 'usd','disbursement','income','gdp', and 'bank'.
+
+## Switzerland
 ```{r, fig.cap='Switzerland COVID Policy Wordcloud', out.width="100%", fig.align="center"}
 # filter data by country, then make wordcloud
 text_words_freq %>%
@@ -285,7 +299,9 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
+Switzerland was consistently within cluster 1, meaning it had the highest relative freedom score among other countries, with middling COVID cases. Switzerland's word cloud was the only one to highlight the word 'freedom', which could point to its relatively high freedom score. However, there are many words that point to government actions, like 'federal', 'government', 'constitutional', and 'council'. There are also many words that point to Swiss citizens, like 'public', 'people', and 'individual'.
 
+##
 
 # References
 
