@@ -84,6 +84,7 @@ world_happiness_map2 <- readRDS("data/world_happiness_map2.rds")
 We first looked at a map of world "Freedom to Make Life Decision" scores in 2019, while COVID-19 was still mainly sequestered in mainland China and not the rest of the country, so that we could examine what various country freedoms looked like prior to the pandemic and compare them to pandemic levels to see how well the Happiness Report measure of "Freedom to Make Life Decisions" captured/accounted for changes in policy based on COVID 19.
 
 ```{r}
+# Plots the 2019 data for comparison with other years (as flashed through in the below animation)
 ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make choices`)) +
   geom_sf()+
   theme_void() + # removes axes
@@ -94,61 +95,10 @@ ggplot(data = world_happiness_map, aes(geometry = geom, fill = `freedom to make 
   # coloring to make chloropleth more readable
   scale_fill_viridis(option = "mako", direction = -1)
 
-
 ```
 
 
 Pre-pandemic, countries that scored highly on the "Freedom to Make Life Decisions Scores" included all the North American countries, Australia, China, India,Saudi Arabia, the Nordic countries, southwest Africa, all of South America except Venezuela, and western Europe. Russia, the countries surrounding it, and Mongolia appeared to remain somewhere mid-pack, while countries on the lower scoring end of the "Freedom to Make Life Decisions" consisted of Venezuela and the majority of the countries in Africa. Scores on the higher end existed in the 0.6-0.7 range, while lower scores hovered around 0.1. Next, we compared these to levels during the pandemic. 
-
-
-```{r}
-# world_happiness_map20 <- world_happiness_map %>%
-#     filter(year == 2020)
-# 
-# freedom_map_20 <- ggplot(data = world_happiness_map20, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2020"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
-
-```
-
-
-```{r}
-# world_happiness_map21 <- world_happiness_map %>%
-#   filter(year == 2021)
-# 
-# freedom_map_21 <- ggplot(data = world_happiness_map21, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2021"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
-```
-
-
-```{r}
-# # Reads in our world map datasets
-# world_happiness_map22 <- world_happiness_map %>%
-#   filter(year == 2022)
-# 
-# freedom_map_21 <- ggplot(data = world_happiness_map22, aes(geometry = geom, fill = `freedom to make choices`)) +
-#   geom_sf()+
-#   theme_void() + # removes axes
-#   # more informative plot/legend/caption titles
-#   labs(title = "World Freedom to Make Life Choices in 2022"
-#        , caption = "Data from Our World in Data and World Happiness Report (2019-2022)"
-#        , fill = "Freedom to Make Life Choices", "Score") +
-#   # coloring to make chloropleth more readable
-#   scale_fill_viridis(option = "mako", direction = -1)
-```
 
 ```{r}
 # Creates the world happiness plot
@@ -180,12 +130,14 @@ Across the studied years, both when comparing prior to pandemic levels and level
 To pick representative countries to explore, we wanted to cluster countries by their number of COVID cases per million people, their Freedom to Make Life Decisions score, but also, from our original dataset, their Happiness Score and COVID deaths per million people so that our clusters more accurately reflect countries we expect to have had more similar outlooks on life, and in particular, on COVID 19 regulations. All measurements were standardized so that they would be weighted equally. We began this process with the year 2020 -- the start of the pandemic. We decided on creating four clusters as creation of an elbow plot (see below) suggested we should. 
 
 ```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center", fig.height=3}
+# Image of the elbow plot (see cluster_wrangling.R for code)
 knitr::include_graphics("img/elbow20.png" )
 ```
 
 The clusters for 2020, on a plot of COVID Cases vs Freedom to Make Life Decisions score are depicted below.
 
 ```{r, fig.cap='2020 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
+# Image of the 2020 clustering data (see cluster_wrangling.R for code)
 knitr::include_graphics("img/freedom_death_cluster20.png")
 ```
 
@@ -198,12 +150,14 @@ In the end, we chose to study the countries Lebanon and Mongolia (Asia), Venezue
 Below is a plot of the 2021 COVID Cases vs Freedom to Make Life Choices/Decisions scores, clustered based on the same criteria as that of the 2020 clustering. 
 
 ```{r, fig.cap='2021 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
+# Image of the 2021 clustering data (see cluster_wrangling.R for code)
 knitr::include_graphics("img/freedom_death_cluster21.png")
 ```
 
 2021 appeared to bring about an increase in COVID cases globally (or at least an increase in reported cases), as we see the pink dots of Group 1 shifting out to the right, indicating an uptick in COVID cases in many countries, though they still maintain their high Freedom to Make Life Decisions score. Group 3 (blue rectangles) now consists of countries with middling Freedom to Make Life Decisions scores, and high COVID Case scores. Groups 2 and 4 however maintained the same characteristics of 2020. Note that the groupings of countries did NOT remain the same from 2020 to 2021. Several countries switched groups for one reason or another. We tracked these switches for our countries of interest. 2020 (below) appeared to further increase COVID cases across the globe. 
 
 ```{r, fig.cap='2022 Clustering of COVID Cases vs Country Freedom Score', out.width="100%", fig.align="center"}
+# Image of the 2022 clustering data (see cluster_wrangling.R for code)
 knitr::include_graphics("img/freedom_death_cluster22.png")
 ```
 
@@ -331,7 +285,7 @@ text_words_freq %>%
                  # Change font family
                  family = "sans"))
 ```
-# Conclusion
+
 
 # References
 
