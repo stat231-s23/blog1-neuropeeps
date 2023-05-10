@@ -41,29 +41,6 @@ for(i in 1:length(countries)) {
 
 saveRDS(text_words_freq, "data/text_words_freq.Rds")
 
-# set seed and colorscheme for wordcloud
-set.seed(15)
-my_palette2 <- brewer.pal(10, "Dark2")
-# filter data by country, then make wordcloud
-text_words_freq %>%
-  filter(source == countries[1]) %>%
-  with(wordcloud(words = word,
-                 freq = n,
-                 min.freq = 10,
-                 max.words = 100,
-                 # Plot the words in a random order
-                 random.order = TRUE,
-                 # Specify the range of the size of the words
-                 scale = c(2, 0.3),
-                 # Specify proportion of words with 90 degree rotation rot.per = 0.15,
-                 # Color words from least to most frequent
-                 colors = my_palette2,
-                 # Change font family
-                 family = "sans"))
-
-
-
-
 
 #### UNUSED CODE -- SENTIMENT ANALYSIS
 # ## SENTIMENT ANALYSIS
